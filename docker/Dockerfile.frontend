@@ -11,8 +11,11 @@ COPY ./turbo.json ./turbo.json
 COPY ./apps/web ./apps/web
 
 RUN bun install
+
+ENV DATABASE_URL=$DATABASE_URL
+
 RUN bun run db:generate
-RUN DATABASE_URL=$DATABASE_URL bun run build # Its failing here now
+RUN bun run build # Its failing here now
 # when you build here, you need to talk to the db, so you need to know where the db is
 
 EXPOSE 3000
