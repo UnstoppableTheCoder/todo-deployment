@@ -21,4 +21,4 @@ jobs:
           context: .
           file: ./docker/Dockerfile.backend
           push: true
-          tags: unstoppablethecoder/user-app-backend:${{github.sha}}
+          tags: unstoppablethecoder/todo-app-backend:${{github.sha}}
