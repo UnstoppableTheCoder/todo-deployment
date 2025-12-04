@@ -10,7 +10,7 @@ COPY ./apps/backend ./apps/backend
 
 # ENV DATABASE_URL=postgres://postgres:3241@postgres:5432/todo-app
 
-RUN bun install
+RUN DATABASE_URL=postgres://postgres:3241@postgres:5432/todo-app bun install
 RUN bun run db:generate
 
 EXPOSE 8080
