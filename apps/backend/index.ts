@@ -9,7 +9,7 @@ app.get("/users", (req, res) => {
   prismaClient.user
     .findMany()
     .then((users) => {
-      res.json(users);
+      res.json({ users });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -32,7 +32,7 @@ app.post("/user", (req, res) => {
       },
     })
     .then((user) => {
-      res.status(201).json(user);
+      res.status(201).json({ user });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
