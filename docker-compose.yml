@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgressecret@postgres:5432/todo-app
+      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app
     depends_on:
       - postgres
 
@@ -15,12 +15,12 @@ services:
       context: ./
       dockerfile: docker/Dockerfile.frontend
       args:
-        - DB_URL:postgresql://postgres:postgressecret@postgres:5432/todo-app
+        - DB_URL:postgresql://postgres:3241@postgres:5432/todo-app
         # you may have to change DB_URL to DATABASE_URL
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgressecret@postgres:5432/todo-app
+      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app
     depends_on:
       - postgres
 
@@ -31,14 +31,14 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgressecret@postgres:5432/todo-app
+      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app
     depends_on:
       - postgres
 
   postgres:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=postgressecret
+      - POSTGRES_PASSWORD=3241
     ports:
       - "5432:5432"
     volumes:
