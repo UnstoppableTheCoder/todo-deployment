@@ -22,3 +22,14 @@ jobs:
           file: ./docker/Dockerfile.backend
           push: true
           tags: unstoppablethecoder/todo-app-backend:${{github.sha}}
+
+        # This can also be used in the place of echo
+        # print "%s" "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_ed25519
+      - name: Add SSH private key and set permissions
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_SSH_KEY }}" &> ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+      - name: SHH and deploy to VM
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -t ubuntu@15.207.16.144 "docker stop user_backend && docker run --name user_backend -d -p 8080:8080 unstoppablethecoder/todo-app-backend:${{github.sha}}

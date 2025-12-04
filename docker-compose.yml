@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app
+      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app # Need to use DB_URL from neon db
     depends_on:
       - postgres
 
