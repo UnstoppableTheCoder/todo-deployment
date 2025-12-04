@@ -8,10 +8,11 @@ COPY ./package.json ./package.json
 COPY ./turbo.json ./turbo.json
 COPY ./apps/backend ./apps/backend
 
-ENV DATABASE_URL=postgres://postgres:3241@postgres:5432/todo-app
+# This is needed for build
+# ENV DATABASE_URL=postgres://postgres:3241@postgres:5432/todo-app
 
 RUN bun install
-RUN bun run db:generate
+RUN DATABASE_URL=no bun run db:generate
 
 EXPOSE 8080
 
