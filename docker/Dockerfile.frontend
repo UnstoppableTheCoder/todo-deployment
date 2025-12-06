@@ -2,8 +2,9 @@ FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
-ARG DATABASE_URL # This is a build argument, its required while building the image
-# docker build --build-ar DATABASE_URL=postgres://db.com/myDb -t fronted-app .
+# This is a build argument, its required while building the image
+# docker build --build-arg DATABASE_URL=postgres://db.com/myDb -t fronted-app .
+ARG DATABASE_URL 
 COPY ./packages ./packages
 COPY ./bun.lock ./bun.lock
 COPY ./package.json ./package.json
@@ -11,11 +12,9 @@ COPY ./turbo.json ./turbo.json
 COPY ./apps/web ./apps/web
 
 RUN bun install
-
 ENV DATABASE_URL=$DATABASE_URL
-
 RUN bun run db:generate
-RUN bun run build # Its failing here now
+RUN bun run build # Its failing here now - because of DATABASE_URL - Get one from neon db
 # when you build here, you need to talk to the db, so you need to know where the db is
 
 EXPOSE 3000

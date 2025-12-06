@@ -16,4 +16,4 @@ EXPOSE 8081
 CMD ["bun", "run", "start:websocket"]
 
 # Without docker compose - Manually : run in the root dir
-# docker build -t todo-app-websocket -f ./docker/Dockerfile.ws .
+# docker build -t todo-app-websocket -f ./docker/Dockerfile.websocket .

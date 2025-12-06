@@ -22,3 +22,5 @@ jobs:
           file: ./docker/Dockerfile.ws
           push: true
           tags: unstoppablethecoder/todo-app-websocket:${{github.sha}}
+
+# Use nginx for reverse proxy

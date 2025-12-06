@@ -15,19 +15,19 @@ services:
       context: ./
       dockerfile: docker/Dockerfile.frontend
       args:
-        - DB_URL:postgresql://postgres:3241@postgres:5432/todo-app
+        - DB_URL:postgresql://postgres:3241@postgres:5432/todo-app # neon db
         # you may have to change DB_URL to DATABASE_URL
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app
+      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app # neon db
     depends_on:
       - postgres
 
   ws:
     build:
       context: ./
-      dockerfile: docker/Dockerfile.ws
+      dockerfile: docker/Dockerfile.websocket
     ports:
       - "8081:8081"
     environment:
