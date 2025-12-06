@@ -33,4 +33,4 @@ jobs:
 
       - name: SHH and deploy to VM
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -t ubuntu@15.207.16.144 "sudo docker stop user_backend && sudo docker rm user_backend && sudo docker run --name user_backend -d -p 8080:8080 -e DATABASE_URL="postgresql://neondb_owner:npg_IRAB60VQncdE@ep-plain-pond-ahubl4og-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require" unstoppablethecoder/todo-app-backend:${{github.sha}}"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -t ubuntu@15.207.16.144 "sudo docker stop user_backend && sudo docker run --name user_backend -d -p 8080:8080 -e DATABASE_URL="postgresql://neondb_owner:npg_IRAB60VQncdE@ep-plain-pond-ahubl4og-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require" unstoppablethecoder/todo-app-backend:${{github.sha}}"
