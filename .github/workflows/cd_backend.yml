@@ -23,21 +23,19 @@ jobs:
           push: true
           tags: unstoppablethecoder/todo-app-backend:${{github.sha}}
 
-        # This can also be used in the place of echo
-        # print "%s" "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_ed25519
       - name: Add SSH private key and set permissions
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_SSH_KEY }}" &> ~/.ssh/id_ed25519
+          echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
 
       - name: SSH and deploy to VM
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -t ubuntu@13.233.102.135 '
-            sudo docker pull unstoppablethecoder/todo-app-backend:${{ github.sha }} &&
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ubuntu@13.233.102.135 "
+            sudo docker pull unstoppablethecoder/todo-app-backend:${{github.sha}} &&
             sudo docker stop user_backend || true &&
             sudo docker rm user_backend || true &&
-            sudo docker run --name user_backend -d -p 8080:8080 
-                -e DATABASE_URL="postgresql://neondb_owner:npg_IRAB60VQncdE@ep-plain-pond-ahubl4og-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-                unstoppablethecoder/todo-app-backend:${{ github.sha }}
-            '
+            sudo docker run --name user_backend -d -p 8080:8080 -e DATABASE_URL=\"$DATABASE_URL\" unstoppablethecoder/todo-app-backend:${{github.sha}}
+          "
