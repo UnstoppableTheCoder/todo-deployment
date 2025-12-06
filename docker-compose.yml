@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app # Need to use DB_URL from neon db
+      - DATABASE_URL=postgresql://neondb_owner:npg_IRAB60VQncdE@ep-plain-pond-ahubl4og-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
     depends_on:
       - postgres
 
@@ -15,12 +15,13 @@ services:
       context: ./
       dockerfile: docker/Dockerfile.frontend
       args:
-        - DB_URL:postgresql://postgres:3241@postgres:5432/todo-app # neon db
-        # you may have to change DB_URL to DATABASE_URL
+        - DATABASE_URL=postgresql://neondb_owner:npg_IRAB60VQncdE@ep-plain-pond-ahubl4og-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app # neon db
+      - DATABASE_URL=postgresql://neondb_owner:npg_IRAB60VQncdE@ep-plain-pond-ahubl4og-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
     depends_on:
       - postgres
 
@@ -31,7 +32,7 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - DATABASE_URL=postgresql://postgres:3241@postgres:5432/todo-app
+      - DATABASE_URL=postgresql://neondb_owner:npg_IRAB60VQncdE@ep-plain-pond-ahubl4og-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
     depends_on:
       - postgres
 
